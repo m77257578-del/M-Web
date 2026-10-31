@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "معرض المشاريع البرمجية المنفذة بواسطة ويب ريكس",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "اسم المشروع البرمجي",
+          "maxLength": 150
+        },
+        "description": {
+          "type": "string",
+          "description": "مميزات المشروع والتقنيات المستخدمة فيه",
+          "maxLength": 1000
+        },
+        "tag": {
+          "type": "string",
+          "description": "تصنيف المشروع (متجر، منصة، نظام، موقع)",
+          "maxLength": 60
+        },
+        "image": {
+          "type": "string",
+          "description": "رابط الصورة المصغرة للمشروع",
+          "maxLength": 2048
+        },
+        "demoUrl": {
+          "type": "string",
+          "description": "رابط المعاينة الحية للمشروع",
+          "maxLength": 2048
+        },
+        "createdAt": {
+          "type": "object",
+          "description": "تاريخ ووقت إضافة المشروع في Firestore"
+        }
+      },
+      "required": ["title", "description", "tag", "image", "demoUrl", "createdAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "طلبات العملاء ورسائل بدء المشاريع الواردة عبر النموذج",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "اسم العميل بالكامل",
+          "maxLength": 120
+        },
+        "phone": {
+          "type": "string",
+          "description": "رقم الواتساب الخاص بالعميل",
+          "maxLength": 30
+        },
+        "details": {
+          "type": "string",
+          "description": "تفاصيل المشروع المطلوب ومواصفاته",
+          "maxLength": 3000
+        },
+        "timestamp": {
+          "type": "object",
+          "description": "وقت إرسال الطلب بدقة في Firestore"
+        }
+      },
+      "required": ["name", "phone", "details", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "مجموعة المشاريع المعروضة - القراءة للجميع والكتابة مقيدة للإدارة عبر Firebase Console"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "مجموعة طلبات العملاء - إنشاء مستند جديد متاح للجميع والقراءة والتعديل ممنوعان"
+    }
+  }
+}
